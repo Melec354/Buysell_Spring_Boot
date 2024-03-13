@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>
+        Buysell
+    </title>
+</head>
+<body>
+<h1>
+    Buysell <span th:if="${user.email == null}"> | <a href="#" th:href="@{'/login'}">Sign in</a></span>
+</h1>
+<h3 th:if="${user.name != null}"><strong th:text="${user.name}"> </strong></h3>
+<form th:if="${user.email != null}" th:action="@{'/logout'}" method="post">
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+    <input type="submit" value="Logout">
+</form>
+<br>
+<a th:if="${user.name != null} AND ${user.isAdmin()}" href="#" th:href="@{'/admin'}">Admin panel</a>
+<h4>
+    Products
+</h4>
+<form action="/" method="get">
+    Search by name:<input type="text" name="title"> <input type="submit" value="Search">
+</form>
+<br>
+<ul th:if="${!products.isEmpty()}">
+    <li th:each="product : ${products}">
+        <strong th:text="${product.title}"> </strong> <span th:text="${product.price}"></span> |
+        <a href="#" th:href="@{'/product/'+ ${product.id}}">More details</a>
+        <!--        <a href="#" th:href="@{'/product'}">More details</a>-->
+    </li>
+</ul>
+<ul th:if="${products.isEmpty()}">
+    <h3>
+        Products is empty
+    </h3>
+</ul>
+<hr>
+<h3 th:if="${user.email != null}">
+    Create a new product
+</h3>
+
+<form th:if="${user.email != null}" th:action="@{'/product/create'}" method="post" enctype="multipart/form-data">
+    Ad name: <input type="text" name="title"/><br><br>
+    Description: <input type="text" name="description"/><br><br>
+    Price: <input type="number" name="price"/><br><br>
+    City: <input type="text" name="city"/><br><br>
+
+    First image: <input type="file" name="file1"/><br><br>
+    Second image: <input type="file" name="file2"/><br><br>
+    Third image: <input type="file" name="file3"/><br><br>
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"><br>
+    <input type="submit" value="Create product"/>
+</form>
+
+</body>
+</html>

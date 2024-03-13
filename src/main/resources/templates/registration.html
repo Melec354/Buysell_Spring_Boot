@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Buysell</title>
+</head>
+<body>
+<h1>
+    Buysell
+</h1>
+<h4>
+    Sign up | <a href="#" th:href="@{'/login'}">Sign in</a>
+</h4>
+<form th:action="@{'/registration'}" method="post">
+    User name:<input type="text" name="name"><br>
+    Email:<input type="email" name="email"><br>
+    Phone number:<input type="text" name="phoneNumber"><br>
+    Password:<input type="password" name="password"><br>
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"><br>
+    <input type="submit" value="Registration">
+</form>
+<br>
+<!--<span th:if="${error??}">Female</span>-->
+</body>
+</html>

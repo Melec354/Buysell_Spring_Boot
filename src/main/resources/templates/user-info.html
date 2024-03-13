@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Buysell</title>
+</head>
+<body>
+<h1>
+    Buysell
+</h1>
+<h3>
+    User details <a href="#" th:href="@{'/user/'+ ${user.id}}"><span
+        th:text="${user.name}"></span></a>
+</h3>
+<b>
+    Phone number: <span
+        th:text="${user.phoneNumber}"></span>
+</b> <br>
+<b>
+    Email: <span
+        th:text="${user.email}"></span>
+</b> <br>
+<h4>
+    <strong th:text="${user.name}"> </strong> products
+</h4>
+
+<ul th:if="${!products.isEmpty()}">
+    <li th:each="product : ${products}">
+        <strong th:text="${product.title}"> </strong> <span th:text="${product.price}"></span> |
+        <a href="#" th:href="@{'/product/'+ ${product.id}}">More details</a>
+        <!--        <a href="#" th:href="@{'/product'}">More details</a>-->
+    </li>
+</ul>
+
+<br>
+<!--<span th:if="${error??}">Female</span>-->
+</body>
+</html>

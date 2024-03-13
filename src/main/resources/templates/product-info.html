@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>
+        Buysell
+    </title>
+</head>
+<body>
+<h1>
+    Buysell
+</h1>
+<h4>
+    Product details
+</h4>
+
+<li th:each="img : ${images}">
+    <img th:src="@{'/image/' +  ${img.id}}" height="60px"/><br>
+</li>
+
+<b>Product name: <span th:text="${product.title}"></span></b><br>
+<b>Description: <span th:text="${product.description}"></span></b><br>
+<b>Price: <span th:text="${product.price}"></span></b><br>
+<b>City: <span th:text="${product.city}"></span></b><br>
+<b>Author name: <a href="#" th:href="@{'/user/'+ ${product.user.id}}"><span
+        th:text="${product.user.name}"></span></a><br></b>
+<b>User phone number: <span th:text="${product.user.phoneNumber}"></span></b><br>
+<hr>
+<h3>
+    Delete product
+</h3>
+<form th:action="@{'/product/delete/'+ ${product.id}}" method="post">
+    <input type="submit" value="Delete"/>
+</form>
+</body>
+</html>

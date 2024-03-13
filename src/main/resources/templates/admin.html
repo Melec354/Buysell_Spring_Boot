@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>
+        Buysell
+    </title>
+</head>
+<body>
+<h1>
+    Buysell
+</h1>
+<hr>
+<h4>
+    Admin panel
+</h4>
+
+<table border="1">
+    <tr>
+        <th>Email</th>
+        <th>Phone number</th>
+        <th>Active</th>
+        <th>Roles</th>
+        <th>Ban</th>
+        <th>Edit</th>
+        <th>Detail information</th>
+    </tr>
+    <tr th:if="${!users.isEmpty()}" th:each="user : ${users}">
+        <th th:text="${user.email}"></th>
+        <th th:text="${user.phoneNumber}"></th>
+        <th th:text="${user.active}"></th>
+        <th th:if="${!user.roles.isEmpty()}"
+            th:text="${#strings.listJoin(user.roles, ',')}">
+        </th>
+        <th>
+            <form th:action="@{'/admin/user/ban/'+ ${user.id}}"
+                  method="post">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                <input type="submit" value="ban"/>
+            </form>
+        </th>
+        <th>
+            <a href="#" th:href="@{'/admin/user/edit/'+ ${user.id}}">Edit</a>
+        </th>
+        <th><a href="#" th:href="@{'/user/'+ ${user.id}}">User details</a></th>
+    </tr>
+</table>
+</body>
+</html>
