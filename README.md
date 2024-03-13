@@ -1,6 +1,6 @@
-My first introduction to Spring framework.
+# My first introduction to Spring framework.  
 
-What i use:  
+# What i use:  
   Spring Boot  
   Spring Security  
-  Thymeleaf  
+  Thymeleaf
